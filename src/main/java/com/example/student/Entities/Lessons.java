@@ -16,11 +16,11 @@ public class Lessons {
     private String adi ;
 
     @Column
-    private String ders_kredi ;
+    private String dersKredi ;
 
     @Column
     private String bolum;
 
     @Column(unique=true)
-    private String ders_kodu;
+    private String dersKodu;
 }

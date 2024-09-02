@@ -21,7 +21,7 @@ public class Students {
     private String bolum;
 
     @Column (unique = true, nullable = false)
-    private int tc_no;
+    private int tcNo;
 
     @Column(unique = true)
     private String email;

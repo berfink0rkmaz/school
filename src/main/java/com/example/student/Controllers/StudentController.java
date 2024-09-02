@@ -1,12 +1,14 @@
 package com.example.student.Controllers;
 
+import com.example.student.Entities.Lessons;
 import com.example.student.Entities.Students;
 import com.example.student.Services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/Students")
@@ -17,7 +19,14 @@ public class StudentController {
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
-    @PostMapping
+    @GetMapping("/getAll")
+    public ResponseEntity<?> getAllStudents() {
+        System.out.println("getAllStudents called");
+        List<Students> students = studentService.getAllStudents();
+        return new ResponseEntity<>(students, HttpStatus.OK);
+    }
+
+    @PostMapping("/save")
     public Students createOgrenci (@RequestBody Students students) {
         System.out.println("save student called...");
         return studentService.saveStudent(students);

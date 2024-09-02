@@ -23,7 +23,7 @@ public class Academisions {
     private String bolum;
 
     @Column (unique = true, nullable = false)
-    private int tc_no;
+    private int tcNo;
 
   //  @Column
    // private String dersKodu;
