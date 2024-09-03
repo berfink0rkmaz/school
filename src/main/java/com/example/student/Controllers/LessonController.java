@@ -23,9 +23,21 @@ public class LessonController {
         List<Lessons> lessons = lessonService.getAllLessons();
         return new ResponseEntity<>(lessons,HttpStatus.OK);
     }
+    @GetMapping("/findByDersKodu")
+    public ResponseEntity<?> getLessonsByDersKodu(@RequestParam String dersKodu) {
+        System.out.println("getLessonsByDersKodu called");
+        Lessons lesson = lessonService.findByDersKodu(dersKodu);
+        return new ResponseEntity<>(lesson,HttpStatus.OK);
+    }
     @PostMapping("/save")
     public Lessons createLesson(@RequestBody Lessons lesson) {
         System.out.println("save lesson called...");
         return lessonService.saveLesson(lesson);
     }
+    @DeleteMapping("/delete")
+    public void deleteLesson(@RequestBody Lessons lesson) {
+        System.out.println("delete lesson called...");
+        lessonService.deleteLesson(lesson);
+    }
+
 }

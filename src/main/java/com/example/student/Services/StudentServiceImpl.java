@@ -28,4 +28,13 @@ public class StudentServiceImpl implements StudentService {
     public List<Students> getAllStudents() {
         return studentRepository.findAll();
     }
+    @Override
+    public Students findByTcNo(String tcNo) {
+        return studentRepository.findByTcNo(tcNo);
+    }
+
+    @Override
+    public void deleteStudent(Students student) {
+        studentRepository.delete(student);
+    }
 }

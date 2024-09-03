@@ -25,10 +25,20 @@ public class StudentController {
         List<Students> students = studentService.getAllStudents();
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
-
+    @GetMapping("/findByTcNo")
+    public ResponseEntity<?> getStudentByTcNo(@RequestParam String tcNo) {
+        System.out.println("getStudentByTcNo called");
+        Students student= studentService.findByTcNo(tcNo);
+        return new ResponseEntity<>(student, HttpStatus.OK);
+    }
     @PostMapping("/save")
     public Students createOgrenci (@RequestBody Students students) {
         System.out.println("save student called...");
         return studentService.saveStudent(students);
+    }
+    @DeleteMapping
+    public void deleteStudent(@RequestBody Students student) {
+        System.out.println("delete student called...");
+        studentService.deleteStudent(student);
     }
 }

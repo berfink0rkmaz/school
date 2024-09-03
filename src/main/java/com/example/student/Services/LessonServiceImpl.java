@@ -24,5 +24,13 @@ public class LessonServiceImpl implements LessonService {
     public List<Lessons> getAllLessons() {
         return lessonRepository.findAll();
     }
+    @Override
+    public Lessons findByDersKodu(String dersKodu) {
+        return lessonRepository.findByDersKodu(dersKodu);
+    }
+    @Override
+    public void deleteLesson(Lessons lesson) {
+        lessonRepository.delete(lesson);
+    }
 
 }
