@@ -2,15 +2,22 @@ package com.example.student.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.Where;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
+@Where(clause = "deleted = false")
 public class Lessons {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    private int id;
+    private Integer id;
 
     @Column
     private String adi ;
@@ -23,4 +30,21 @@ public class Lessons {
 
     @Column(unique=true)
     private String dersKodu;
+
+    private boolean deleted = false ;
+
+    @ManyToMany
+    @JoinTable(
+            name = "lesson_student",
+            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
+    private List<Students> selectedLessons = new ArrayList<Students>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "lesson_academision",
+            joinColumns = @JoinColumn(name = "academision_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
+    private List<Academisions> givenLessons = new ArrayList<Academisions>();
+
 }

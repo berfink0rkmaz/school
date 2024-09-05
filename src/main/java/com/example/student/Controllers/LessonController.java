@@ -1,9 +1,10 @@
 package com.example.student.Controllers;
 
+import com.example.student.Constants;
 import com.example.student.Entities.Lessons;
+import com.example.student.GenericResponse;
 import com.example.student.Services.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,26 +19,61 @@ public class LessonController {
         this.lessonService = lessonService;
     }
     @GetMapping("/getAll")
-    public ResponseEntity<?> getAllLessons() {
+    public GenericResponse<?> getAllLessons() {
         System.out.println("getAllLessons called");
         List<Lessons> lessons = lessonService.getAllLessons();
-        return new ResponseEntity<>(lessons,HttpStatus.OK);
+        if(lessons.isEmpty()) {
+            return GenericResponse.error(Constants.EMPTY_LIST);
+        }else{
+            return GenericResponse.success(lessons);
+        }
     }
-    @GetMapping("/findByDersKodu")
-    public ResponseEntity<?> getLessonsByDersKodu(@RequestParam String dersKodu) {
+    @GetMapping("/find-By-DersKodu")
+    public GenericResponse<?> getLessonsByDersKodu(@RequestParam String dersKodu) {
         System.out.println("getLessonsByDersKodu called");
-        Lessons lesson = lessonService.findByDersKodu(dersKodu);
-        return new ResponseEntity<>(lesson,HttpStatus.OK);
+            Lessons lesson = lessonService.findByDersKodu(dersKodu);
+            if(lesson == null) {
+                /*return ResponseEntity.ok("Bu dersKodu'na sahip Lesson sistemde yok");*/
+                //return ResponseEntity.badRequest().body("hsts");
+                return GenericResponse.error(Constants.EMPTY_DERSKODU);
+            }else{
+                return GenericResponse.success(lesson);
+                /*return new ResponseEntity<>(lesson,HttpStatus.OK);*/
+                //return ResponseEntity.ok(lesson);
+            }
     }
     @PostMapping("/save")
-    public Lessons createLesson(@RequestBody Lessons lesson) {
+    public GenericResponse<?> createLesson(@RequestBody Lessons lesson) {
         System.out.println("save lesson called...");
-        return lessonService.saveLesson(lesson);
+        Lessons lessonExists= lessonService.findByDersKodu(lesson.getDersKodu());
+        if(lessonExists == null){
+            lessonService.saveLesson(lesson);
+            return GenericResponse.success(lesson);
+        }
+        else {
+            return GenericResponse.error(Constants.FOUND_DERSKODU);
+        }
     }
     @DeleteMapping("/delete")
-    public void deleteLesson(@RequestBody Lessons lesson) {
+    public GenericResponse<?> deleteLesson(@RequestBody Lessons lesson) {
         System.out.println("delete lesson called...");
-        lessonService.deleteLesson(lesson);
+        Lessons lessonExists= lessonService.findByDersKodu(lesson.getDersKodu());
+        if(lessonExists == null){
+            return GenericResponse.error(Constants.EMPTY_DERSKODU);
+        }else{
+            lessonService.deleteLesson(lessonExists);
+            return GenericResponse.success(lessonExists);
+        }
     }
-
+    @PutMapping("/update")
+    public GenericResponse<?> updateLesson(@RequestBody Lessons lesson) {
+        System.out.println("update lesson called...");
+        Lessons lessonExists= lessonService.findByDersKodu(lesson.getDersKodu());
+        if(lessonExists == null){
+            return GenericResponse.error(Constants.EMPTY_DERSKODU);
+        }else{
+            Lessons updatedLesson= lessonService.updateLesson(lesson);
+            return GenericResponse.success(updatedLesson);
+        }
+    }
 }

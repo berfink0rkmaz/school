@@ -1,12 +1,14 @@
-package com.example.student.Services;
+package com.example.student.Services.Impl;
 
 import com.example.student.Entities.Lessons;
 import com.example.student.Repositories.LessonRepository;
+import com.example.student.Services.LessonService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,7 +32,15 @@ public class LessonServiceImpl implements LessonService {
     }
     @Override
     public void deleteLesson(Lessons lesson) {
-        lessonRepository.delete(lesson);
+        lesson.setDeleted(true);
+        lessonRepository.save(lesson);
     }
-
+    @Override
+    public Lessons updateLesson(Lessons lesson) {
+        return lessonRepository.save(lesson);
+    }
+    @Override
+    public Optional<Lessons> findLessonById(Integer id) {
+        return lessonRepository.findById(id);
+    }
 }
