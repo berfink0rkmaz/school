@@ -39,12 +39,12 @@ public class AcademisionController {
             return GenericResponse.success(academision);
         }
     }
-    @GetMapping("find-by-id")
+    @GetMapping("find-By-Id")
     public GenericResponse<?> getAcademisionById(@RequestParam Integer id) {
         System.out.println("getAcademisionById called");
         Optional<Academisions> academision = academisionService.findById(id);
         if(academision.isPresent()) {
-            return GenericResponse.success(Constants.Found_ID);
+            return GenericResponse.success(academision.get());
         }else{
             return GenericResponse.error(Constants.EMPTY_ID);
         }
@@ -72,7 +72,7 @@ public class AcademisionController {
         }
     }
     @DeleteMapping("/delete/{id}")
-    public GenericResponse<?> deleteAcademision(@PathVariable Integer id) {
+    public GenericResponse<?> deleteAcademisionById(@PathVariable Integer id) {
         System.out.println("delete academision by id called...");
         Optional<Academisions> academision = academisionService.findById(id);
         if(academision.isPresent()) {

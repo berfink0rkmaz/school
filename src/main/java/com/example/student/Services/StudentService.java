@@ -3,6 +3,7 @@ package com.example.student.Services;
 import com.example.student.Entities.Academisions;
 import com.example.student.Entities.Lessons;
 import com.example.student.Entities.Students;
+import com.example.student.GenericResponse;
 
 import java.util.List;
 import java.util.Optional;

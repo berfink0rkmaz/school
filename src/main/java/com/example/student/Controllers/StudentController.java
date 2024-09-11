@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/Students")
@@ -38,6 +39,16 @@ public class StudentController {
             return GenericResponse.success(student);
         }
     }
+    @GetMapping("/find-By-Id")
+    public GenericResponse<?> getStudentById(@RequestParam Integer id) {
+        System.out.println("getStudentById called");
+        Optional<Students> student = studentService.findById(id);
+        if (student.isPresent()) {
+            return GenericResponse.success(student.get());
+        }else {
+            return GenericResponse.error(Constants.EMPTY_ID);
+        }
+    }
     @PostMapping("/save")
     public GenericResponse<?> createOgrenci (@RequestBody Students student) {
         System.out.println("save student called...");
@@ -58,6 +69,17 @@ public class StudentController {
         }else{
             studentService.deleteStudent(studentExists);
             return GenericResponse.success(studentExists);
+        }
+    }
+    @DeleteMapping("/delete/{id}")
+    public GenericResponse<?> deleteStudent(@PathVariable Integer id) {
+        System.out.println("delete student called...");
+        Optional<Students> student = studentService.findById(id);
+        if (student.isPresent()) {
+            studentService.deleteStudent(student.get());
+            return GenericResponse.success(student.get());
+        }else {
+            return GenericResponse.error(Constants.EMPTY_ID);
         }
     }
     @PutMapping ("/update")

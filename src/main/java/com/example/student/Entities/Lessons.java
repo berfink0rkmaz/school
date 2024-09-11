@@ -5,9 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.Where;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Entity
@@ -23,7 +21,7 @@ public class Lessons {
     private String adi ;
 
     @Column
-    private String dersKredi ;
+    private int dersKredi ;
 
     @Column
     private String bolum;
@@ -31,16 +29,22 @@ public class Lessons {
     @Column(unique=true)
     private String dersKodu;
 
+    @Column
+    private String dönem;
+
+    @Column
+    private int yıl;
+
     private boolean deleted = false ;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "lesson_student",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
-    private List<Students> selectedLessons = new ArrayList<Students>();
+    private List<Students> SecenOgrenciler = new ArrayList<Students>();
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "lesson_academision",
             joinColumns = @JoinColumn(name = "academision_id", referencedColumnName = "id"),

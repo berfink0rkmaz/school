@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/Lessons")
@@ -42,6 +43,16 @@ public class LessonController {
                 //return ResponseEntity.ok(lesson);
             }
     }
+    @GetMapping("/find-By-Id")
+    public GenericResponse<?> getLessonById(@RequestParam Integer id) {
+        System.out.println("getLessonById called");
+        Optional<Lessons> lesson =lessonService.findLessonById(id);
+        if (lesson.isPresent()) {
+            return GenericResponse.success(lesson.get());
+        }else{
+            return GenericResponse.error(Constants.EMPTY_ID);
+        }
+    }
     @PostMapping("/save")
     public GenericResponse<?> createLesson(@RequestBody Lessons lesson) {
         System.out.println("save lesson called...");
@@ -63,6 +74,17 @@ public class LessonController {
         }else{
             lessonService.deleteLesson(lessonExists);
             return GenericResponse.success(lessonExists);
+        }
+    }
+    @DeleteMapping("/delete/{id}")
+    public GenericResponse<?> deleteLessonById(@PathVariable Integer id) {
+        System.out.println("delete lesson called...");
+        Optional<Lessons> lesson =lessonService.findLessonById(id);
+        if (lesson.isPresent()) {
+            lessonService.deleteLesson(lesson.get());
+            return GenericResponse.success(lesson.get());
+        }else {
+            return GenericResponse.error(Constants.EMPTY_ID);
         }
     }
     @PutMapping("/update")
