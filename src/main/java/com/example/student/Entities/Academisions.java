@@ -39,7 +39,7 @@ public class Academisions {
 
     private boolean deleted = false;
 
-    @ManyToMany(mappedBy = "givenLessons",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "givenLessons",cascade = CascadeType.ALL)
     private List<Lessons> givens = new ArrayList<>();
 
 

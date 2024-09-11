@@ -30,13 +30,20 @@ public class DersKayitServiceImpl implements DersKayitService {
         this.lessonRepository = lessonRepository;
         this.studentRepository = studentRepository;
     }
-
+    public int toplamKrediBul(List<Lessons> lessons){
+        int toplamKredi=0;
+        for (Lessons l : lessons) {
+            toplamKredi+=l.getDersKredi();
+        }
+        return toplamKredi;
+    }
+    @Override
     public GenericResponse<?> saveDersKayit(DersKayitDto dersKayitDto ) {
         Students student = studentRepository.findById(dersKayitDto.getStudentId()).orElse(null);
         Lessons lesson= lessonRepository.findById(dersKayitDto.getLessonId()).orElse(null);
         List<Lessons> lessonss=student.getSecilenDersler();
 
-        if(lessonss.contains(dersKayitDto.getLessonId())) {
+        if(!lessonss.contains(dersKayitDto.getLessonId()) && (toplamKrediBul(lessonss)+lesson.getDersKredi() <= 45)) {
             DersKayit dersKayit = new DersKayit();
             dersKayit.setStudentId(dersKayitDto.getStudentId());
             dersKayit.setLessonId(dersKayitDto.getLessonId());

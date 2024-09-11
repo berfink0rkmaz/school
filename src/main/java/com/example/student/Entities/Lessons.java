@@ -44,11 +44,11 @@ public class Lessons {
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
     private List<Students> SecenOgrenciler = new ArrayList<Students>();
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "lesson_academision",
             joinColumns = @JoinColumn(name = "academision_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
-    private List<Academisions> givenLessons = new ArrayList<Academisions>();
+    private Academisions academisions= new Academisions();
 
 }
