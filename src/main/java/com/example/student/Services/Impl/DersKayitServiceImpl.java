@@ -33,7 +33,7 @@ public class DersKayitServiceImpl implements DersKayitService {
         Students student = studentRepository.findById(dersKayitDto.getStudentId()).orElse(null);
         Lessons lesson= lessonRepository.findById(dersKayitDto.getLessonId()).orElse(null);
         DersKayit dersKayit = new DersKayit();
-        if(lesson!=null) {
+        if(dersKayitRepository.existsById(dersKayitDto.getLessonId())&&dersKayitRepository.existsById(dersKayitDto.getStudentId())) { //??
             //DersKayit dersKayit = new DersKayit();
             dersKayit.setStudentId(dersKayitDto.getStudentId());
             dersKayit.setLessonId(dersKayitDto.getLessonId());
