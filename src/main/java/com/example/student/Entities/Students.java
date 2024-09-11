@@ -40,7 +40,7 @@ public class Students {
     @Column
     private LocalDate dogumTarihi;
 
-    LocalDate bugunTarihi = LocalDate.now();
+    private LocalDate bugunTarihi = LocalDate.now();
 
 
     @Column

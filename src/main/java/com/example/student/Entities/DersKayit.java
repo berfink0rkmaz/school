@@ -22,9 +22,6 @@ public class DersKayit {
     private String ogrenciAdi;
     private String ogrenciSoyadi;
 
-    public void add() {
-
-    }
 
 
     /*@ManyToOne

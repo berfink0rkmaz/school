@@ -30,7 +30,7 @@ public class Lessons {
     private String dersKodu;
 
     @Column
-    private String dönem;
+    private String donem;
 
     @Column
     private int yıl;
