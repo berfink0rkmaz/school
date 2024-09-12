@@ -2,17 +2,16 @@ package com.example.student.Entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.With;
 import org.hibernate.annotations.Where;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//@Table(name="Academisions")
+//@Table(name="Academician")
 @Where(clause="deleted = false")
 @Data
 @Entity
-public class Academisions {
+public class Academician {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,19 +19,16 @@ public class Academisions {
     private Integer id;
 
     @Column
-    private String adi ;
+    private String name;
 
     @Column
-    private String soyadi ;
+    private String surname;
 
     @Column
-    private String bolum;
+    private String department;
 
     @Column (unique = true, nullable = false)
     private String tcNo;
-
-  //  @Column
-   // private String dersKodu;
 
     @Column(unique = true)
     private String email;
@@ -40,7 +36,7 @@ public class Academisions {
     private boolean deleted = false;
 
     @OneToMany(mappedBy = "givenLessons",cascade = CascadeType.ALL)
-    private List<Lessons> givens = new ArrayList<>();
+    private List<Lesson> givens = new ArrayList<>();
 
 
 }

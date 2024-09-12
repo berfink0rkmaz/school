@@ -1,14 +1,11 @@
 package com.example.student.Services;
-import com.example.student.Entities.Lessons;
-
-import java.util.List;
-import java.util.Optional;
+import com.example.student.Entities.Lesson;
+import com.example.student.ResponseMessage.GenericResponse;
 
 public interface LessonService {
-    Lessons saveLesson(Lessons lesson);
-    List<Lessons> getAllLessons();
-    Lessons findByDersKodu(String dersKodu);
-    void deleteLesson(Lessons lesson);
-    Lessons updateLesson(Lessons lesson);
-    Optional<Lessons> findLessonById(Integer id);
+    GenericResponse<?> getAllLessons();
+    GenericResponse<?> saveLesson(Lesson lesson);
+    GenericResponse<?> findById(Integer id);
+    GenericResponse<?> deleteLesson(Integer Id);
+    GenericResponse<?> updateLesson(Lesson lesson);
 }

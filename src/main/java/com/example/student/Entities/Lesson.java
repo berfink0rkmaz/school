@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @Entity
 @Where(clause = "deleted = false")
-public class Lessons {
+public class Lesson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,22 +18,22 @@ public class Lessons {
     private Integer id;
 
     @Column
-    private String adi ;
+    private String name;
 
     @Column
-    private int dersKredi ;
+    private int courseCredit;
 
     @Column
-    private String bolum;
+    private String department;
 
     @Column(unique=true)
-    private String dersKodu;
+    private String courseCode;
 
     @Column
-    private String donem;
+    private String semester;
 
     @Column
-    private int yıl;
+    private int year;
 
     private boolean deleted = false ;
 
@@ -42,13 +42,13 @@ public class Lessons {
             name = "lesson_student",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
-    private List<Students> SecenOgrenciler = new ArrayList<Students>();
+    private List<Student> studentList = new ArrayList<Student>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "lesson_academision",
+            name = "lesson_academician",
             joinColumns = @JoinColumn(name = "academision_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
-    private Academisions academisions= new Academisions();
+    private Academician academician = new Academician();
 
 }

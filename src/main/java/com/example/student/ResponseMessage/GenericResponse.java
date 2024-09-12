@@ -1,4 +1,4 @@
-package com.example.student;
+package com.example.student.ResponseMessage;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
