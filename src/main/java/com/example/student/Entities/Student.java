@@ -41,7 +41,7 @@ public class Student {
 
 
     @Column
-    private int yas; //calculateAge(birthDate,todayDate);
+    private int age; //calculateAge(birthDate,todayDate);
 
     @Column
     private String gender;

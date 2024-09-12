@@ -42,13 +42,13 @@ public class Lesson {
             name = "lesson_student",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
-    private List<Student> studentList = new ArrayList<Student>();
+    private List<Student> studentList = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "lesson_academician",
-            joinColumns = @JoinColumn(name = "academision_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "academician_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
-    private Academician academician = new Academician();
+    private Academician academist = new Academician();
 
 }

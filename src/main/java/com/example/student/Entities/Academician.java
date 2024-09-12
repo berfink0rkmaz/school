@@ -35,8 +35,8 @@ public class Academician {
 
     private boolean deleted = false;
 
-    @OneToMany(mappedBy = "givenLessons",cascade = CascadeType.ALL)
-    private List<Lesson> givens = new ArrayList<>();
+    @OneToMany(mappedBy = "academist",cascade = CascadeType.ALL)
+    private List<Lesson> lessonList = new ArrayList<>();
 
 
 }
