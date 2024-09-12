@@ -44,4 +44,8 @@ public class StudentController {
     public GenericResponse<?> updateStudent(@RequestBody Student student) {
         return studentService.updateStudent(student);
     }
+    @GetMapping("/takenLessons/{id}")
+    public GenericResponse<?> takenLessons(@PathVariable Integer id) {
+        return studentService.getTakenLessons(id);
+    }
 }

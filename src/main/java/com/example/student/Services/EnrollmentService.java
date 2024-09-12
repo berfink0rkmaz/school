@@ -7,9 +7,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface EnrollmentService {
-    //List<Enrollment> getAllDersKayit();
+    //GenericResponse<?> getLessonsByDepartment(Integer studentId);
     GenericResponse<?> saveEnrollment(EnrollmentDto enrollmentDto);
-    //void controlKredi(EnrollmentDto dersKayitDto);
-    //boolean controlDers(Integer studentId);
+
 
 }

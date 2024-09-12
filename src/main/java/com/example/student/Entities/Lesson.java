@@ -49,6 +49,6 @@ public class Lesson {
             name = "lesson_academician",
             joinColumns = @JoinColumn(name = "academician_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
-    private Academician academist = new Academician();
+    private Academician academist ;
 
 }

@@ -1,5 +1,6 @@
 package com.example.student.Services.Impl;
 
+import com.example.student.Entities.Lesson;
 import com.example.student.Entities.Student;
 import com.example.student.Repositories.StudentRepository;
 import com.example.student.ResponseMessage.Constants;
@@ -44,11 +45,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public GenericResponse<?> findById(Integer id) {
         System.out.println("getStudentById called");
-        Student student = studentRepository.findStudentById(id);
-        if (student==null) {
+        Student studentExists = studentRepository.findStudentById(id);
+        if (studentExists ==null) {
             return GenericResponse.error(Constants.EMPTY_ID);
         }else {
-            return GenericResponse.success(student);
+            return GenericResponse.success(studentExists);
         }
     }
 
@@ -75,5 +76,18 @@ public class StudentServiceImpl implements StudentService {
             Student updatedStudent= studentRepository.save(student);
             return GenericResponse.success(updatedStudent);
         }
+    }
+
+    @Override
+    public GenericResponse<?> getTakenLessons(Integer id){
+        System.out.println("getTakenLessons called...");
+        Student studentExists = studentRepository.findStudentById(id);
+        if (studentExists == null) {
+            return GenericResponse.error(Constants.EMPTY_ID);
+        }else{
+            List<Lesson> takenLessons = studentExists.getTakenLessons();
+            return GenericResponse.success(takenLessons);
+        }
+
     }
    }

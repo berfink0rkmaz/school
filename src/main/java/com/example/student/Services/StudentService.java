@@ -9,4 +9,5 @@ public interface StudentService {
     GenericResponse<?> findById(Integer id);
     GenericResponse<?> deleteStudent(Integer id);
     GenericResponse<?> updateStudent(Student student);
+    GenericResponse<?> getTakenLessons(Integer id);
 }

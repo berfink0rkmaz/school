@@ -37,6 +37,19 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         }
         return totalCredit;
     }
+    /*
+    @Override
+    public GenericResponse<?> getLessonsByDepartment(Integer studentId) {
+        Student student = studentRepository.findStudentById(studentId);
+        if (student == null) {
+            return GenericResponse.error(Constants.EMPTY_STUDENT);
+        }else{
+            String department= student.getDepartment();
+            List<Lesson> lessons = lessonRepository.findLessonByDepartment(department);
+            return GenericResponse.success(lessons);
+        }
+    }
+    */
     @Override
     public GenericResponse<?> saveEnrollment(EnrollmentDto enrollmentDto) {
         Student student = studentRepository.findById(enrollmentDto.getStudentId()).orElse(null);
