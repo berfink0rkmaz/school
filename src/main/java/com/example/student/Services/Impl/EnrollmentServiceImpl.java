@@ -1,6 +1,7 @@
 package com.example.student.Services.Impl;
 
 import com.example.student.Dto.EnrollmentDto;
+import com.example.student.Dto.EnrollmentMapper;
 import com.example.student.Entities.Enrollment;
 import com.example.student.Entities.Lesson;
 import com.example.student.Entities.Student;
@@ -20,12 +21,14 @@ import java.util.List;
 @Service
 @Transactional
 public class EnrollmentServiceImpl implements EnrollmentService {
+    private final EnrollmentMapper enrollmentMapper;
     private final EnrollmentRepository enrollmentRepository;
     private final LessonRepository lessonRepository;
     private final StudentRepository studentRepository;
 
     @Autowired
-    public EnrollmentServiceImpl(EnrollmentRepository enrollmentRepository, LessonRepository lessonRepository, StudentRepository studentRepository) {
+    public EnrollmentServiceImpl(EnrollmentMapper enrollmentMapper, EnrollmentRepository enrollmentRepository, LessonRepository lessonRepository, StudentRepository studentRepository) {
+        this.enrollmentMapper = enrollmentMapper;
         this.enrollmentRepository = enrollmentRepository;
         this.lessonRepository = lessonRepository;
         this.studentRepository = studentRepository;

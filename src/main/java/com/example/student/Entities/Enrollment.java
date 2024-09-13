@@ -3,6 +3,7 @@ package com.example.student.Entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+
 @Table(name = "lesson_student")
 @Entity
 @Data
