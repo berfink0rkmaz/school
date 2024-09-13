@@ -30,6 +30,9 @@ public class Lesson {
     private String courseCode;
 
     @Column
+    private int quota;
+
+    @Column
     private String semester;
 
     @Column

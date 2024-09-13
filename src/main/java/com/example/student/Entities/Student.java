@@ -1,5 +1,6 @@
 package com.example.student.Entities;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.Where;

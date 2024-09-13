@@ -66,8 +66,11 @@ public class EnrollmentServiceImpl implements EnrollmentService {
         else{
             List<Lesson> lessons=student.getTakenLessons();
 
-            if(!lessons.contains(enrollmentDto.getLessonId()) && (findTotalCredit(lessons)+lesson.getCourseCredit() <= 45)) {
+            if(!lessons.contains(lesson) && (findTotalCredit(lessons)+lesson.getCourseCredit() <= 45)) {
                 Enrollment enrollment = new Enrollment();
+                 enrollment = enrollmentMapper.enrollmentDtoToEnrollment(enrollmentDto);
+                //Enrollment enrollment= new Enrollment();
+
                 enrollment.setStudentId(enrollmentDto.getStudentId());
                 enrollment.setLessonId(enrollmentDto.getLessonId());
                 enrollment.setCourseCredit(lesson.getCourseCredit());
@@ -77,8 +80,10 @@ public class EnrollmentServiceImpl implements EnrollmentService {
 
                 return GenericResponse.success(enrollment);
 
-            } else {if (lessons.contains(enrollmentDto.getLessonId())) return GenericResponse.error(Constants.FOUND_LESSON);
-            else return GenericResponse.error(Constants.OVERFLOW_CREDIT);}
+            } else {
+                if (lessons.contains(lesson)){ return GenericResponse.error(Constants.FOUND_LESSON);}
+                else {return GenericResponse.error(Constants.OVERFLOW_CREDIT);}
+            }
         }
 
 

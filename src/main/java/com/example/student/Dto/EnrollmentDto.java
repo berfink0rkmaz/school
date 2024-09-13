@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class EnrollmentDto{
     //private Integer id;
-    private Integer StudentId;
-    private Integer LessonId;
+    private Integer studentId;
+    private Integer lessonId;
 
 }
