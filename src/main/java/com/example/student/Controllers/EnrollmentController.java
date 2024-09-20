@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/dersKayit")
+@RequestMapping("/Enrollment")
 public class EnrollmentController {
     private final EnrollmentService enrollmentService;
     @Autowired
