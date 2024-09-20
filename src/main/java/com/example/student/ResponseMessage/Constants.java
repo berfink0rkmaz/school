@@ -14,6 +14,9 @@ public class Constants {
 
     public static final String EMPTY_STUDENT="No student found with the same id";
     public static final String EMPTY_LESSON="No lesson found with the same id";
+    public static final String EMPTY_ENROLLMENT="No enrollment found with the same id";
+
+    public static final String UNAUTHORIZED="Unauthorized";
 
 
     public static final String FOUND_LESSON ="Student has taken this lesson before.";

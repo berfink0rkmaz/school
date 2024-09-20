@@ -24,7 +24,7 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public GenericResponse<?> getAllLessons() {
-        System.out.println("getAllLessons called");
+        System.out.println("getLessonList called");
         List<Lesson> lessons = lessonRepository.findAll();
         if(lessons.isEmpty()) {
             return GenericResponse.error(Constants.EMPTY_LIST);

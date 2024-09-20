@@ -21,7 +21,7 @@ public class Enrollment {
     private Integer studentId;
 
     @Column
-    private boolean status;
+    private boolean status ;
 
     private int courseCredit;
 
