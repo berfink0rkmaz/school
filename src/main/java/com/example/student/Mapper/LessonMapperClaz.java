@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class LessonMapperClaz {
 
     public static List<LessonResponse> toLessonResponseList(List<Lesson> lessons) {
-        return lessons.stream().map(lesson -> {
+        return lessons.stream().map(lesson -> { //
             LessonResponse response = new LessonResponse();
             response.setId(lesson.getId());
             response.setName(lesson.getName());
