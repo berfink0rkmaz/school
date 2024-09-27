@@ -3,7 +3,6 @@ COPY pom.xml .
 COPY .mvn .mvn
 COPY src src
 COPY mvnw .
-COPY .idea .idea
 COPY .gitignore .
 COPY mvnw.cmd .
 RUN mvn clean package -DskipTests
