@@ -1,13 +1,17 @@
 package com.example.student.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Where(clause = "deleted = false")
 public class Lesson {
@@ -40,18 +44,19 @@ public class Lesson {
 
     private boolean deleted = false ;
 
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "lesson_student",
             joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
-    private List<Student> studentList = new ArrayList<>();
+    private List<Student> studentList;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "lesson_academician",
             joinColumns = @JoinColumn(name = "academician_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "lesson_id", referencedColumnName = "id"))
-    private Academician academist ;
+    private Academician academist;
 
 }

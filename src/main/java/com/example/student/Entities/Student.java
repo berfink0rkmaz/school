@@ -1,8 +1,11 @@
 package com.example.student.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import java.time.LocalDate;
@@ -10,7 +13,8 @@ import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Where(clause = "deleted = false")
 public class Student {
@@ -49,6 +53,7 @@ public class Student {
 
     private boolean deleted = false;
 
+   @JsonIgnore
    @ManyToMany(mappedBy = "studentList",cascade = CascadeType.ALL)
    private List<Lesson> takenLessons = new ArrayList<>();
 

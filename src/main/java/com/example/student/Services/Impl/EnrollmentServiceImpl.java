@@ -1,7 +1,7 @@
 package com.example.student.Services.Impl;
 
 import com.example.student.Dto.EnrollmentDto;
-import com.example.student.Dto.EnrollmentMapper;
+import com.example.student.Mapper.EnrollmentMapper;
 import com.example.student.Entities.Academician;
 import com.example.student.Entities.Enrollment;
 import com.example.student.Entities.Lesson;
@@ -86,7 +86,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     public GenericResponse<?> getLessonList(Integer id){
         Academician academician = academicianRepository.findAcademicianById(id);
         List<Lesson> lessons= academician.getLessonList();
-        if(lessons.size()==0){
+        if(lessons.isEmpty()){
             return GenericResponse.error(Constants.EMPTY_LIST);
         }else{
             return GenericResponse.success(lessons);
@@ -97,13 +97,13 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     public GenericResponse<?> getAllEnrollment(Integer id) {
         Lesson lesson = lessonRepository.findById(id).orElse(null);
         List<Student> students= lesson.getStudentList();
-        if(!students.isEmpty()){
+        if(students.isEmpty()){
             return GenericResponse.error(Constants.EMPTY_LIST);
         } else {
             return GenericResponse.success(students);}
     }
     @Override
-    public GenericResponse<?> enrollmentApproval(Integer id, Integer academicianId) {
+    public GenericResponse<?> enrollmentApproval(Integer id, Integer academicianId) {      //çalışmıyor
         // Find the enrollment by ID
         Enrollment enrollment = enrollmentRepository.findEnrollmentById(id);
         if (enrollment == null) {
@@ -122,7 +122,7 @@ public class EnrollmentServiceImpl implements EnrollmentService {
     }
 
     @Override
-    public GenericResponse<?> enrollmentRefusal(Integer id, Integer academicianId) {
+    public GenericResponse<?> enrollmentRefusal(Integer id, Integer academicianId) {    //çalışmıyor
         // Find the enrollment by ID
         Enrollment enrollment = enrollmentRepository.findEnrollmentById(id);
         if (enrollment == null) {
